@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+#[cfg(not(target_arch = "wasm32"))]
 use electrsd::bitcoind::bitcoincore_rpc::Auth;
 
 use simplicityhl::elements::{Address, Script, Transaction, Txid};
@@ -22,6 +23,7 @@ pub struct ProviderInfo {
     /// URL of the target direct `elementsd` or `bitcoind` RPC interface.
     pub elements_url: Option<String>,
     /// Authentication settings (e.g. cookie or username/password) for the RPC backend.
+    #[cfg(not(target_arch = "wasm32"))]
     pub auth: Option<Auth>,
 }
 

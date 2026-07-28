@@ -13,9 +13,7 @@ workspace = true
 [dependencies]
 thiserror = { workspace = true }
 sha2 = { workspace = true }
-minreq = { workspace = true }
 simplicityhl = { workspace = true }
-electrsd = { workspace = true }
 serde = { workspace = true }
 hex = { workspace = true }
 
@@ -24,3 +22,8 @@ elements-miniscript = { version = "0.4", features = ["base64", "serde"] }
 bip39 = { version = "2.0.0", features = ["rand"] }
 dyn-clone = { version = "1.0.20" }
 bitcoin_hashes = { version = "0.14.1" }
+
+# Native-only deps: electrsd/bitcoind and minreq+rustls cannot build for wasm32.
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+electrsd = { workspace = true }
+minreq = { workspace = true }
